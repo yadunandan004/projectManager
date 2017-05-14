@@ -1,3 +1,10 @@
-module.exports={
-	dburl:'mongodb://yadu4992:4jc10ec125@ds137759.mlab.com:37759/heroku_wgqk5qzx'
+'use strict';
+if(app.get('env')=='production')
+{
+	module.exports=require('./production.json');
 }
+else
+{
+	module.exports=require('./development.json');
+}
+module.exports={dburl:url}

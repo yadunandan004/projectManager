@@ -19,11 +19,7 @@ var sParams={
   ephemeral: true,
   resave:false,
   saveUninitialized: true,
-  cookie:{},
-  store:new MongoStore({
-    url:config.dburl,
-    collection:'sessions'
-  })
+  cookie:{}
 };
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -41,6 +37,10 @@ if(app.get('env')=='production')
 {
 	app.set('trust proxy',1);
 	sParams.cookie.secure=true;
+  sParams.store=new MongoStore({
+    url:config.dburl,
+    collection:'sessions'
+  });
 }
 app.use(session(sParams));
 app.use(passport.initialize());
