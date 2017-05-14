@@ -19,6 +19,7 @@ var sParams={
   ephemeral: true,
   resave:false,
   saveUninitialized: true,
+  cookie:{}
   // store:new MongoStore({
   //   url:config.dburl,
   //   collection:'sessions'
