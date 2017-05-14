@@ -5,15 +5,28 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session=require('express-session');
+var MongoStore = require('connect-mongo')(session);
 var passport=require('passport');
 var index = require('./routes/index');
 var users = require('./routes/users');
-
+var config=require('./config/config');
 var app = express();
-var sParams={secret:'loudekebal',resave:false,saveUninitialized:true,cookie:{}};
+var sParams={
+  cookieName: 'session',
+  secret: 'mcc_proj_abhi,shama and yadu',
+  duration: 30 * 60 * 1000,
+  activeDuration: 5 * 60 * 1000,
+  ephemeral: true,
+  resave:false,
+  saveUninitialized: true,
+  // store:new MongoStore({
+  //   url:config.dburl,
+  //   collection:'sessions'
+  // })
+};
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

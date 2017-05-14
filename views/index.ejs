@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+	<title>Express</title>
+</head>
+<body>
+<h3>Wellcome yadu</h3>
+<button id="login"> Log In</button>
+<button id="test"> Test</button>
+<input type="file" name="demo" id="fileinp">
+<button id="uplbtn">upload</button>
+<button id="test1"> Test</button>
+<script type="text/javascript">
+	var fpath="";
+	$(document).ready(function(){
+		$("#uplbtn").click(function(){
+				var formdata= new FormData();	
+				var file=document.getElementById('fileinp').files[0];
+				formdata.append('wiki-pages',file);
+				// console.log(file);
+				$.ajax({type:'POST',url:'http://localhost:3000/users/fileUpload',data:formdata,processData:false,contentType:false,
+					success:function(data){
+						console.log(data);
+					}
+					})
+		});
+		$("#login").click(function(){
+			$.post("http://localhost:3000/users/login",{username:'yadu123',password:'123'},function(data){
+				console.log(data);
+			});
+		})
+		$("#test").click(function(){
+			$.post("http://localhost:3000/users/createWiki",{name:'testFile',content:'this is just a test content, which is not meant to question the principle of life but to just follow the mundane pathway that is we all adhere to so dearly in our own little dimensions fearing for the chaos which might happen if go astray. So ... file testing 123.'},function(data){
+				console.log(data);
+			});
+		})
+		$("#test1").click(function(){
+			$.get("http://localhost:3000/users/createRole",function(data){
+				console.log(data);
+			});
+		});
+	})
+</script>
+</body>
+</html>	
+

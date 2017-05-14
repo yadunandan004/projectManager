@@ -1,10 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var aclSetup= require('./../config/acl');
-var acl;
-aclSetup.then((module)=>{
-	acl=module;
-});
+
 // console.log(acl);
 // user add with default roles
 // Access pivileges for roles
@@ -12,16 +9,16 @@ aclSetup.then((module)=>{
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
-
-router.post('/createRole',function(req,res,next){
-	// console.log(req.body.role);
-	acl.allow('Manager',['wiki'],'*');
-	acl.addUserRoles('yadu',"Manager");
-	acl.isAllowed('yadu', 'wiki', 'view', function(err, res){
-	    if(res){
-	        console.log("User joed is allowed to view wiki");
-	    }
-	})
-	res.end();
+router.get('/logout', function(req, res){
+	req.logout();
+	req.session.reset();
+	res.render('./../views/homepage',{result:"User has been successfully logged out"});
 });
+router.get('/filer',function(req,res){
+	res.render('index');
+})
+router.get('/sample',function(req,res){
+	res.send(req.user);
+})
+
 module.exports = router;
