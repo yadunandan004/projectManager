@@ -8,4 +8,3 @@ else
 {
 	module.exports=require('./development.json');
 }
-module.exports={dburl:url}
