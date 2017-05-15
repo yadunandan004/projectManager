@@ -15,12 +15,14 @@ var app = express();
 var sParams={
   cookieName: 'session',
   secret: 'mcc_proj_abhi,shama and yadu',
-  duration: 30 * 60 * 1000,
-  activeDuration: 5 * 60 * 1000,
   ephemeral: true,
   resave:false,
   saveUninitialized: true,
-  cookie:{}
+  cookie:{},
+  store:new MongoStore({
+    url:config.dburl,
+    collection:'sessions'
+  });
 };
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -38,10 +40,6 @@ if(app.get('env')=='production')
 {
 	app.set('trust proxy',1);
 	sParams.cookie.secure=true;
-  sParams.store=new MongoStore({
-    url:config.dburl,
-    collection:'sessions'
-  });
 }
 app.use(session(sParams));
 app.use(passport.initialize());
