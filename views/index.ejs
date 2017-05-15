@@ -10,7 +10,7 @@
 <button id="test"> Test</button>
 <input type="file" name="demo" id="fileinp">
 <button id="uplbtn">upload</button>
-<button id="test1"> Test</button>
+<button id="test1"> Test1</button>
 <script type="text/javascript">
 	var fpath="";
 	$(document).ready(function(){
@@ -26,7 +26,7 @@
 					})
 		});
 		$("#login").click(function(){
-			$.post("http://localhost:3000/users/login",{username:'yadu123',password:'123'},function(data){
+			$.post("http://mccproj543.herokuapp.com/login",{username:'yadu4992',password:'4jc10ec125'},function(data){
 				console.log(data);
 			});
 		})
@@ -36,7 +36,7 @@
 			});
 		})
 		$("#test1").click(function(){
-			$.get("http://localhost:3000/users/createRole",function(data){
+			$.post("http://mccproj543.herokuapp.com/teams/newTeam",{teamName:'yadus77'},function(data){
 				console.log(data);
 			});
 		});
