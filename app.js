@@ -22,7 +22,7 @@ var sParams={
   store:new MongoStore({
     url:config.dburl,
     collection:'sessions'
-  })
+  });
 };
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -36,11 +36,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-if(app.get('env')=='production')
-{
-	app.set('trust proxy',1);
-	sParams.cookie.secure=true;
-}
+// if(app.get('env')=='production')
+// {
+// 	app.set('trust proxy',1);
+// 	sParams.cookie.secure=true;
+// }
 app.use(session(sParams));
 app.use(passport.initialize());
 app.use(passport.session());
