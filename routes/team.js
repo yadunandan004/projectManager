@@ -65,6 +65,7 @@ router.post('/removeUser',function(req,res){
 });
 router.post('/newTeam',function (req, res, next) {
 	var post=req.body;
+	console.log(req.user);
 	Teams.findOne({teamName:post.teamName}).then(function(err,team){
 		if(err)
 		{
@@ -84,7 +85,7 @@ router.post('/newTeam',function (req, res, next) {
 				newteam.teamName=post.teamName;
 				newteam.createdBy=req.user.username;
 				newteam.roles=['Manager','Member'];
-				console.log(newteam);
+				// console.log(newteam);
 				// res.send("done");
 				newteam.save((err,obj)=>{
 					if(err)

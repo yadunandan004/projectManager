@@ -13,6 +13,8 @@
 <button id="test1"> Test1</button>
 <script type="text/javascript">
 	var fpath="";
+	var baseUrl="http://mccproj543.herokuapp.com/";
+	// var baseUrl="http://localhost:3000/";
 	$(document).ready(function(){
 		$("#uplbtn").click(function(){
 				var formdata= new FormData();	
@@ -26,7 +28,7 @@
 					})
 		});
 		$("#login").click(function(){
-			$.post("http://mccproj543.herokuapp.com/login",{username:'yadu4992',password:'4jc10ec125'},function(data){
+			$.post(baseUrl+"login",{username:'yadu4992',password:'4jc10ec125'},function(data){
 				console.log(data);
 			});
 		})
@@ -36,7 +38,7 @@
 			});
 		})
 		$("#test1").click(function(){
-			$.post("http://mccproj543.herokuapp.com/teams/newTeam",{teamName:'yadus77'},function(data){
+			$.post("teams/newTeam",{teamName:'yadus778'},function(data){
 				console.log(data);
 			});
 		});
