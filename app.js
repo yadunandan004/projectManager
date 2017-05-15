@@ -22,7 +22,7 @@ var sParams={
   store:new MongoStore({
     url:config.dburl,
     collection:'sessions'
-  });
+  })
 };
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
