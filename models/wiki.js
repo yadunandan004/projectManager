@@ -4,6 +4,10 @@ var Schema = mongoose.Schema;
 
 // create a schema
 var wikiSchema = new Schema({
+	wikiId:{
+		type:String,
+		required:true
+	},
     createdBy: {
         type: String,
         required: false,

@@ -10,6 +10,7 @@ var path=require('path');
 var aclSetup= require('./../config/acl');
 var acl;
 var mailer=require('./../mailing/mailer');
+var xls=require('./../mailing/createXls');
 aclSetup.then((module)=>{
 	acl=module;
 });
@@ -39,10 +40,9 @@ router.get('/dashboard', function(req, res) {
 			else
 			{
 				res.send({status:0,msg:"authentication issue, please login again"});
-			}
-			
-		})
-	}
+			}	
+		});
+	};
 });
 
 router.get('/createRole',function(req,res,next){
@@ -56,24 +56,7 @@ router.get('/createRole',function(req,res,next){
 	});
 	
 });
-router.get('/sendmail',function(req,res){
-	var content={
-		senderlist:['yadunandan4992@gmail.com'],
-		subject:'test',
-		body:'just testing'
-	};
-	mailer(content,function(err,obj){
-		if(err)
-		{
-			res.send('error while sending mail');
-		}
-		else
-		{
-			res.send('mail sent');
-		}
 
-	});
-})
 router.post('/fileUpload',upload.array('wiki-pages',12),function(req,res,next){
 	res.send(req.user);
 });
@@ -81,33 +64,5 @@ router.post('/fileUpload',upload.array('wiki-pages',12),function(req,res,next){
 router.get('/getwiki',function(req,res){
 	res.send("blah blah");
 })
-router.post('/createWiki',function(req,res){
-	var post=req.body;
 
-	if(req.isAuthenticated()){
-		var fpath=path.join('./uploads/', req.user.username);
-		if(!fs.existsSync(fpath))
-		{	
-			fs.mkdirSync(fpath);
-		}
-		// console.log(/\.\w+/i.test(post.name));
-		if(!/\.\w+/i.test(post.name))
-		{
-			post.name+='.txt';
-		}
-		fpath=path.resolve(fpath+'/'+post.name);
-		fs.writeFile(fpath,post.content,function(err){
-			if(err)
-			{
-				res.send('error creating file');
-			}
-			// acl.allow('creator',post.name,*);
-			res.send('file created');
-		});
-	}
-	else
-	{
-		res.send('Authentication issue Login again');
-	}
-});
 module.exports = router;

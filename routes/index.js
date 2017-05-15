@@ -38,7 +38,7 @@ router.post('/signup',function(req,res,next){
 				if(err)
 					throw err;
 				res.send({status:1,msg:'new user created',data:obj});
-			})
+			});
 		}
 	})
 	.catch(next);

@@ -1,29 +1,18 @@
 const mongoose=require('./../db/dbSetup');
 var Schema = mongoose.Schema;
 
-var commentSchema = new Schema({
-    commentBy:  {
-        type: String,
-        required: true
-    },
-    comment:  {
-        type: String,
-        required: true
-    }
-}, {
-    timestamps: true
-});
+
 
 // create a schema
 var ticketSchema = new Schema({
-    createdBy: {
-        type: String,
-        required: true
-    },
-    title: {
+    ticketId: {
         type: String,
         required: true,
         unique: true
+    },
+    createdBy: {
+        type: String,
+        required: true
     },
     description: {
         type: String,
@@ -45,7 +34,10 @@ var ticketSchema = new Schema({
         type: String,
         required: false
     },
-    comments:[commentSchema]
+    comments:{
+        type:[String],
+        required:false
+    }
 }, {
     timestamps: true
 });

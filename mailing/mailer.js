@@ -12,7 +12,8 @@ module.exports= function(content,done){
 	    from: 'team@mccproj.com',
 	    to: content.senderlist,
 	    subject: content.subject,
-	    html: content.body
+	    html: content.body,
+	    attachments:content.attachments
 	};
 
 	transport.sendMail(mailOptions,(error,info)=>{

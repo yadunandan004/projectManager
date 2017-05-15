@@ -15,15 +15,15 @@ var teamSchema = new Schema({
     roles: {
         type: [String],
         required: false
-    }
+    },
 	tasks: {
 		type: [String],   //task ids
         required: false
-	}
+	},
 	tickets: {
 		type: [String],   //ticket ids
         required: false
-	}
+	},
 	wikis: {
 		type: [String],   //
         required: false
