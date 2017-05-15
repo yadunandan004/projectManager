@@ -7,9 +7,9 @@ const User= require('./../models/user');
 // user add with default roles
 // Access pivileges for roles
 /* GET home page. */
-// router.get('/', function(req, res, next) {
-//   res.render('index', { title: 'Express' });
-// });
+router.get('/', function(req, res, next) {
+  res.render('index', { title: 'Express' });
+});
 router.post('/login',
 	passport.authenticate('local-login'), 
 	function(req, res, next){
