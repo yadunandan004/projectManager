@@ -1,0 +1,18 @@
+/* team.js
+ * /team/projectStatus – GET 
+ * /team/wiki
+ * /team/reports
+ * /team/manageUsers
+ */
+var express = require('express');
+var teamRouter = express.Router();
+ 
+teamRouter.route('/')
+.get(function (req, res, next) {
+	res.send('get team');
+})
+.post(function (req, res, next) {
+	
+});
+
+module.exports = teamRouter;

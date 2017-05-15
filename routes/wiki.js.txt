@@ -1,0 +1,42 @@
+/*
+ * /team/wiki/:wikiID
+ * /team/ wiki/newWiki – POST 
+ * /team/ wiki/newWiki/:wikiID – POST 
+ */
+
+var express = require('express');
+var wikiRouter = express.Router();
+ 
+wikiRouter.route('/')
+.get(function (req, res, next) {
+	res.send('get team/wiki');
+})
+.post(function (req, res, next) {
+	
+});
+
+wikiRouter.route('/:wikiID')
+.get(function (req, res, next) {
+	res.send('get team/wiki/:wikiID');
+})
+.post(function (req, res, next) {
+	
+});
+
+wikiRouter.route('/newWiki')
+.get(function (req, res, next) {
+	res.send('get team/newWiki');
+})
+.post(function (req, res, next) {
+	
+});
+
+wikiRouter.route('/newWiki/:wikiID')
+.get(function (req, res, next) {
+	res.send('get team/newWiki/:wikiID');
+})
+.post(function (req, res, next) {
+	
+});
+
+module.exports = wikiRouter;
