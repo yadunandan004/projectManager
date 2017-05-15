@@ -17,7 +17,7 @@ var sParams={
   secret: 'mcc_proj_abhi,shama and yadu',
   ephemeral: true,
   resave:false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   cookie:{},
   store:new MongoStore({
     url:config.dburl,

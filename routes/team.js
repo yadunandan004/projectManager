@@ -65,7 +65,7 @@ router.post('/removeUser',function(req,res){
 });
 router.post('/newTeam',function (req, res, next) {
 	var post=req.body;
-	console.log(req.session.user);
+	console.log(req.user);
 	Teams.findOne({teamName:post.teamName}).then(function(err,team){
 		if(err)
 		{
