@@ -67,7 +67,7 @@ router.post('/newTask',function (req, res,next) {
 						res.send({status:-1,msg:"error creating new task"});
 					}
 					res.send({status:1,msg:"created new task"});
-				})
+				});
 			}
 			else
 			{
@@ -80,7 +80,7 @@ function reporter(post,type)
 {
 	if(typeof post.taskID==="undefined")
 	{
-		Teams.findOne({teamName:post.team}).then(function(obj){
+		Teams.findOne({teamName:post.team}).then(function(err,obj){
 			if(obj){
 				var tasks=obj.tasks;
 					looper(tasks, type, function(data){
@@ -93,7 +93,7 @@ function reporter(post,type)
 	}
 	else
 	{
-		Tasks.findOne({taskname:post.taskID,completed:false}).then(function(obj){
+		Tasks.findOne({taskname:post.taskID,completed:false}).then(function(err,obj){
 			if(obj){
 				return(obj);
 			}else{
@@ -105,28 +105,30 @@ function reporter(post,type)
 function looper(tasks,type,done)
 {	
 	temp={};
-	temp["taskname"]=tasks[i];
-	if(type == 0) //in progress tasks
-	{
-		temp["completed"]=false;
-		temp["startedOn"]={"$lte":Date.now()};
-	}
-	if(type==1)	//completed tasks
-	{
-		temp["completed"]=true;
-	}
-	if(type==2)
-	{
-		temp["completed"]=false;
-		temp["startedOn"]={"$gt":Date.now()};
-	}
+	
 	var res=[];
 	(function next(i){
+
 		if(i==tasks.length)
 		{
-				done(res);
+			done(res);
 		}
-		Tasks.findOne().then((data)=>{
+		temp["taskname"]=tasks[i];
+		if(type == 0) //in progress tasks
+		{
+			temp["completed"]=false;
+			temp["startedOn"]={"$lte":Date.now()};
+		}
+		if(type==1)	//completed tasks
+		{
+			temp["completed"]=true;
+		}
+		if(type==2)
+		{
+			temp["completed"]=false;
+			temp["startedOn"]={"$gt":Date.now()};
+		}
+		Tasks.findOne(temp,(data)=>{
 			if(data)
 			{
 				res.push(data);

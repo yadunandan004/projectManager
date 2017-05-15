@@ -26,17 +26,7 @@ var storage=multer.diskStorage({
 	}
 });
 var upload = multer({storage:storage}); 
-var acl;
-aclSetup.then((module)=>{
-	acl=module;
-});
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
 
-// router.post('/getUser',passport.authenticate('local',
-// 	{successRedirect:'/user',failureRedirect:'/'}));
 router.get('/dashboard', function(req, res) {
 	res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
 	if(req.isAuthenticated())

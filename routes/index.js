@@ -14,7 +14,7 @@ router.post('/login',
 	passport.authenticate('local-login'), 
 	function(req, res, next){
 		if(req.user){
-			res.send({status:1,msg:"logged in",data:req.user});
+			res.send({status:1,msg:"logged in",data:{email:req.user.email,username:req.user.username,name:req.user.name}});
 		} else {
 			res.send({status:0,msg:"not logged in"});
 		}		
